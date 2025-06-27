@@ -1,0 +1,16 @@
+{
+  "name": "api_express",
+  "version": "1.0.0",
+  "description": "Esta es la API de la Automotora Don Juanito",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts"
+  },
+  "author": "Don Juanito",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
