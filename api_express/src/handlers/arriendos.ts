@@ -1,4 +1,4 @@
-// Se encarga de pedir los arriendos de la base de datos (en algun momento xD)
+// Este handler se encargará de pedir los arriendos de la base de datos (en algun momento xD)
 import {Request, Response} from "express";
 
 // Obtiene todos los arriendos
