@@ -23,3 +23,5 @@ class Arriendo extends Model{ // El ID del arreindo lo asume Sequelize como un e
     @Column({type:DataType.STRING(50), field: "nombre_cliente"})
     declare nombreCliente: string
 }
+
+export default Arriendo
