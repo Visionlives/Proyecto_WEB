@@ -6,6 +6,7 @@ import {
     getArriendoById, 
     getArriendos, 
     getArriendosActivos, 
+    getArriendosPorTipoV, 
     getArriendosTerminados, 
     ingreArriendo } from "./handlers/arriendos";
 
@@ -21,6 +22,9 @@ router.get("/arriendos/activos", getArriendosActivos)
 
 // Obtener todos los arriendos terminados
 router.get("/arriendos/terminados", getArriendosTerminados)
+
+// Obtener cantidad de arriendos por vehiculo
+router.get("/arriendos/por-tipo-v", getArriendosPorTipoV)
 
 // Ingresar arriendo
 router.post("/arriendos", ingreArriendo)

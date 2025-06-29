@@ -1,7 +1,7 @@
 // Este handler se encargará de pedir los arriendos de la base de datos (en algun momento xD)
 import {Request, Response} from "express";
 import Arriendo from "../models/Arriendo";
-import { Op } from "sequelize";
+import { Op, Sequelize, } from "sequelize";
 
 // Obtiene todos los arriendos
 export const getArriendos = async (request:Request, response:Response) => {
@@ -73,4 +73,16 @@ export const elimArriendo = async (request:Request, response:Response) => {
     const arriendoEliminado = await Arriendo.findByPk(id)
     await arriendoEliminado.destroy()
     response.json("Arriendo con ID: " + id + ", eliminado")
+}
+
+// Obtener la cantidad de arriendos que tiene cada vehiculo
+export const getArriendosPorTipoV = async (request:Request, response:Response) => {
+    const countArriendosPorV = await Arriendo.findAll({
+        attributes: ['tipo_Vehiculo',
+            [Sequelize.fn('COUNT', Sequelize.col('tipo_Vehiculo')), 'arriendos']
+        ],
+        group: ['tipo_Vehiculo'],
+    })
+
+    response.json({data: countArriendosPorV})
 }
