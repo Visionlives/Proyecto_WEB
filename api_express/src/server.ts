@@ -23,6 +23,9 @@ async function conectarBD(){
 
 conectarBD()
 
+// Para habilitar la lectura del JSON que envia el cliente
+server.use(Express.json())
+
 // Aquellos request que comiencen con /api seran manejados por el archivo router.ts
 server.use("/api", router)
 

@@ -26,7 +26,7 @@ router.get("/arriendos/terminados", getArriendosTerminados)
 router.post("/arriendos", ingreArriendo)
 
 // Registrar devolucion (modificamos un arriendo en el fondo)
-router.put("/arriendos/:id", devolArriendo)
+router.patch("/arriendos/:id", devolArriendo)
 
 // Eliminar arriendo
 router.delete("/arriendos/:id", elimArriendo)

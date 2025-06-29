@@ -42,17 +42,35 @@ export const getArriendoById = async (request:Request, response:Response) => {
 
 // Ingresar arriendo
 export const ingreArriendo = async (request:Request, response:Response) => {
-    response.json("Aqui ingresaremos / registraremos los arriendos que se hagan")
+    // Solucion sencilla para pasar de UTC a UTC-4
+    const fI = new Date()
+    fI.setHours(fI.getHours() - 4)
+
+    // Usamos un "Spread" en el body con el "...", asi obtenemos todos los atributos y despues asignamos las fechas correspondientes
+    const arriendoIngresado = await Arriendo.create({...request.body, 
+        fechaInicio: fI, 
+        fechaFin: null})
+    response.json({data: arriendoIngresado})
 }
 
 // Registrar devolucion de arriendo (necesitaremos el ID)
 export const devolArriendo = async (request:Request, response:Response) => {
     const {id} = request.params
-    response.json("Aqui registraremos la devolucion de un arriendo: " + id)
+    const arriendoDevuelto = await Arriendo.findByPk(id)
+
+    // Solucion sencilla para pasar de UTC a UTC-4
+    const fF = new Date()
+    fF.setHours(fF.getHours() - 4)
+
+    arriendoDevuelto.fechaFin = fF
+    await arriendoDevuelto.save()
+    response.json({data: arriendoDevuelto})
 }
 
 // Eliminar arriendo (necesitaremos el ID)
 export const elimArriendo = async (request:Request, response:Response) => {
     const {id} = request.params
-    response.json("Aqui eliminaremos un arriendo: " + id)
+    const arriendoEliminado = await Arriendo.findByPk(id)
+    await arriendoEliminado.destroy()
+    response.json("Arriendo con ID: " + id + ", eliminado")
 }
