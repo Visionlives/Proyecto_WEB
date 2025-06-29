@@ -1,6 +1,7 @@
 import Express, { request, response } from "express";
 import router from "./router";
 import db from "./config/database";
+import cors, {CorsOptions} from "cors"
 
 const server = Express()
 
@@ -22,6 +23,19 @@ async function conectarBD(){
 }
 
 conectarBD()
+
+// Configuracion de CORS
+const corsOptions: CorsOptions = {
+    origin: function(origin, callback){
+        if (!origin || origin === process.env.FRONTEND_URL){
+            callback(null, true)
+        }else{
+            callback(new Error("No eres bienvenido"), false)
+        }
+    }
+}
+
+server.use(cors(corsOptions))
 
 // Para habilitar la lectura del JSON que envia el cliente
 server.use(Express.json())
