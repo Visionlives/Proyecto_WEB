@@ -5,14 +5,22 @@ import {
     elimArriendo, 
     getArriendoById, 
     getArriendos, 
+    getArriendosActivos, 
+    getArriendosTerminados, 
     ingreArriendo } from "./handlers/arriendos";
 
 const router = Router()
 
 // Endpoints de los Arriendos
 
-// Obtener arriendos
+// Obtener todos los arriendos
 router.get("/arriendos", getArriendos)
+
+// Obtener todos los arriendos activos
+router.get("/arriendos/activos", getArriendosActivos)
+
+// Obtener todos los arriendos terminados
+router.get("/arriendos/terminados", getArriendosTerminados)
 
 // Ingresar arriendo
 router.post("/arriendos", ingreArriendo)
