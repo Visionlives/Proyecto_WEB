@@ -5,14 +5,18 @@ import NavBarLateral from "../components/NavBarLateral";
 export default function Layout(){
     return(
         <>
-            {/* HTML DE LA NAVBAR LATERAL */}
-            <NavBarLateral/>
+            <div className="layout-wrapper layout-content-navbar">
+                <div className="layout-container">
+                    {/* HTML DE LA NAVBAR LATERAL */}
+                    <NavBarLateral/>
 
-            {/* CONTENIDO PRINCIPAL */}
-            <main className="container-fluid">
-                {/* CONTENIDO DINAMICO */}
-                <Outlet/> 
-            </main>
+                    {/* CONTENIDO PRINCIPAL */}
+                    <main className="container-fluid">
+                        {/* CONTENIDO DINAMICO */}
+                        <Outlet/> 
+                    </main>
+                </div>
+            </div>
         </>
     )
 }
