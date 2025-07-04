@@ -9,7 +9,7 @@ class Arriendo extends Model{ // El ID del arreindo lo asume Sequelize como un e
     declare fechaInicio: Date
 
     @Column({type:DataType.DATE, field: "fecha_fin"}) // AllowNull se asume como "true" en caso de no especificarlo
-    declare fechaFin: Date
+    declare fechaFin: Date | null // Puede ser nulo si el arriendo aun esta activo 
 
     @Column({type:DataType.STRING(6), field: "patente_vehiculo"})
     declare patenteVehiculo: string
