@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Home from './views/Home';
+import RegistrarArriendo from './views/RegistrarArriendo';
+import CrearUsuario from './views/CrearUsuario';
+import CambiarContrasenna from "./views/CambiarContrasenna";
 
 export const router = createBrowserRouter([
     {
@@ -10,10 +13,19 @@ export const router = createBrowserRouter([
             {
                 index:true,
                 element:<Home />,
-            }
-            // {
-            //     path
-            // }
+            },
+            {
+                path: 'registrar',
+                element: <RegistrarArriendo />
+            },
+            {
+                path: 'usuario/crear',
+                element: <CrearUsuario />
+            },
+            {
+                path: 'usuario/editar',
+                element: <CambiarContrasenna />
+            }            
         ]
     }
 ])
