@@ -47,10 +47,7 @@ export default function ArriendoTerminadoFila({index, arriendoTerminado, onBorra
                         <button type="button" className="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                             <i className="icon-base bx bx-dots-vertical-rounded"></i>
                         </button>
-                        <div className="dropdown-menu">
-                            <a className="dropdown-item" href="javascript:void(0);">
-                                <i className="icon-base bx bx-edit-alt me-1"></i> Finalizar
-                            </a>
+                        <div className="dropdown-menu">                            
                             <a className="dropdown-item" onClick={()=>onBorrar(arriendoTerminado.id)}>
                                 <i className="icon-base bx bx-trash me-1"></i> Borrar
                             </a>
