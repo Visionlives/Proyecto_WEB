@@ -16,7 +16,7 @@ export default function ArriendosPorTipo()
         <>
         <div className="container-xxl flex-grow-1 container-p-y">
             <div className="card mb-4">
-                <h5 className="card-header">Arriendos activos por tipo de vehiculo</h5>
+                <h5 className="card-header">Arriendos historicos por tipo de vehiculo</h5>
                 </div>
             <div className="col-xxl-4 col-lg-12 col-md-4 order-1">
                   <div className="row">
