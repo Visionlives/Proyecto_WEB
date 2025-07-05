@@ -32,14 +32,6 @@ export const getArriendosTerminados = async (request:Request, response:Response)
     response.json({data: arriendosTerm})
 }
 
-// Obtiene la informacion de un arriendo en especifico mediante ID, por ende hay que pasarle uno
-// para que sepa cual arriendo seleccionar
-export const getArriendoById = async (request:Request, response:Response) => {
-    // La constante es "id" porque mi endpoint es "/arriendos/:id"
-    const {id} = request.params
-    response.json("Arriendo con ID: " + id)
-}
-
 // Ingresar arriendo
 export const ingreArriendo = async (request:Request, response:Response) => {
     // Solucion sencilla para pasar de UTC a UTC-4
