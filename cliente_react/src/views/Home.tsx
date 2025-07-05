@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import { getArriendosActivos } from "../services/ArriendosService";
+import { devolArriendo, elimArriendo, getArriendosActivos } from "../services/ArriendosService";
 import type { ArriendoActivo } from "../types/arriendos";
 import ArriendoActivoFila from "../components/ArriendoActivoFila";
+import { useState } from "react";
 
 export async function loader()
 {
@@ -11,7 +12,23 @@ export async function loader()
 
 export default function Home()
 {
-    const arriendosActivos = useLoaderData() as ArriendoActivo[];
+    //Poder reiniciar la BD en la pagina de forma automatica
+    const arriendosActivosIniciales = useLoaderData() as ArriendoActivo[];
+    const [arriendosActivos, setArriendos] = useState<ArriendoActivo[]>(arriendosActivosIniciales);
+
+    const handleEliminar = async (arriendoId:number) =>
+    {
+        await elimArriendo(arriendoId);
+        //filter genera una nueva lista filtrada
+        setArriendos(arriendosActivos.filter(arr => arr.id !== arriendoId));
+    }
+
+    const handleDevolver = async (arriendoId:number) =>
+    {
+        await devolArriendo(arriendoId);
+        setArriendos(arriendosActivos.filter(arr => arr.id !== arriendoId));
+    }
+
     return (
         <>
             <div className="container-xxl flex-grow-1 container-p-y">    
@@ -33,7 +50,7 @@ export default function Home()
                             <tbody className="table-border-bottom-0">
                                 {arriendosActivos.map((arriendosActivos, index) => 
                                 (
-                                    <ArriendoActivoFila key={arriendosActivos.id} index={index} arriendoActivo={arriendosActivos} />
+                                    <ArriendoActivoFila key={arriendosActivos.id} index={index} arriendoActivo={arriendosActivos} onBorrar={handleEliminar} onDevolver={handleDevolver}/>
                                 ))}
                             </tbody>
                         </table>

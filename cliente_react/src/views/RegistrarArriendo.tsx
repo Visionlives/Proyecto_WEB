@@ -1,4 +1,4 @@
-import { Form, redirect, type ActionFunctionArgs } from "react-router-dom"
+import { Form, redirect, useActionData, type ActionFunctionArgs } from "react-router-dom"
 import { ingreArriendo } from "../services/ArriendosService";
 import { useRef } from "react";
 
@@ -15,6 +15,13 @@ export async function action({request}: ActionFunctionArgs)
 }
 
 export default function RegistrarArriendo() {
+    const actionData = useActionData() as 
+    {
+      success?: boolean 
+      error?: string 
+      detalleErrores: { [key: string]: string[] }
+    };
+
     const formRef = useRef<HTMLFormElement | null>(null) ;
     const handleReset = () => 
     {
@@ -27,34 +34,44 @@ export default function RegistrarArriendo() {
               <div className="card mb-6">                
                 <div className="card-body pt-4">
                   <h5 className="card-title text-primary mb-3">Ingresa los datos del nuevo arriendo</h5>
+
+                  {/* Div de error */}
+                  {actionData?.error && 
+                  
+                    <div className="alert alert-danger " >{actionData?.error}</div>
+                  }
                   <Form id="formAccountSettings" method="POST" ref={formRef}>
                     <div className="row g-6">                         
                       <div className="col-md-6">
                         {/* htmlFor = *id del input*: hace que al clickear el label te mande al input */}
                         {/* Patente vehiculo */}
                         <label htmlFor="patenteVehiculo" className="form-label">Patente para el vehiculo</label>
-                        <input className="form-control" type="text" id="patenteVehiculo" name="patenteVehiculo" placeholder="XXXX-XX" />
+                        <input className={`form-control ${actionData?.detalleErrores?.patenteVehiculo ?`is-invalid` : ''}`} type="text" id="patenteVehiculo" name="patenteVehiculo" placeholder="XXXX-XX" />
+                        {'patenteVehiculo' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.patenteVehiculo[0]} </div>)}                        
                       </div>  
-                      {/* Tipo vehiculo "combobox"*/}
-                      <div className="col-md-6">
-                        
+                      
+                      {/* Tipo vehiculo "combobox"*/}                      
+                      <div className="col-md-6">                        
                         <label htmlFor="tipoVehiculo" className="form-label">Tipo del vehiculo</label>
-                        <select className="form-select" id="tipoVehiculo" name="tipoVehiculo">
+                        <select className={`form-select ${actionData?.detalleErrores?.tipoVehiculo ?`is-invalid` : ''}`} id="tipoVehiculo" name="tipoVehiculo">
                           <option value="" >Seleccione un tipo de vehiculo</option>
                           <option value="Sedan">Sedán</option>
                           <option value="SUV">SUV</option>
                           <option value="Camioneta">Camioneta</option>                          
-                        </select>                        
+                        </select>  
+                        {'tipoVehiculo' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.tipoVehiculo[0]} </div>)}                                              
                       </div>           
                       {/* Rut cliente */}
                       <div className="col-md-6">
                         <label htmlFor="rutCliente" className="form-label">Rut del cliente</label>
-                        <input className="form-control" type="text" id="rutCliente" name="rutCliente" placeholder="XXXXXXXX-X"/>
+                        <input className={`form-control ${actionData?.detalleErrores?.rutCliente ?`is-invalid` : ''}`} type="text" id="rutCliente" name="rutCliente" placeholder="XXXXXXXX-X"/>
+                        {'rutCliente' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.rutCliente[0]} </div>)}                                              
                       </div>         
                       {/* Nombre Cliente   */}
                       <div className="col-md-6">
                         <label htmlFor="nombreCliente" className="form-label">Nombre del cliente</label>
-                        <input className="form-control" type="text" id="nombreCliente" name="nombreCliente" placeholder="Juanito" />
+                        <input className={`form-control ${actionData?.detalleErrores?.nombreCliente ?`is-invalid` : ''}`} type="text" id="nombreCliente" name="nombreCliente" placeholder="Juanito" />
+                        {'nombreCliente' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.nombreCliente[0]} </div>)}                                              
                       </div>                                                                                                                       
                     </div>
                     <div className="mt-6">

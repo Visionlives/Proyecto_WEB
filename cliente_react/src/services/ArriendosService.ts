@@ -60,18 +60,56 @@ export async function ingreArriendo(formData: IngresarArriendoData )
         {
             console.log("Error1");
             const url = `${import.meta.env.VITE_API_URL}/arriendos`;
-            await axios.post(url, 
-                { 
-                    patenteVehiculo: resultado.output.patenteVehiculo,
-                    tipoVehiculo: resultado.output.tipoVehiculo,
-                    rutCliente: resultado.output.rutCliente,
-                    nombreCliente: resultado.output.nombreCliente,
-                });
+            await axios.post(url, resultado.output);
             return {success: true};
+        }
+        else
+        {
+            const detalleErrores: Record<string, string[]> = {}
+            
+            for (const issue of resultado.issues) 
+            {
+                const campo = issue.path![0].key as string
+                if (!detalleErrores[campo]) 
+                {
+                    detalleErrores[campo] = [];
+                }
+                detalleErrores[campo].push(issue.message);
+            }
+            console.log(detalleErrores[0]);
+            return { success: false, error: "El formulario contiene errores", detalleErrores: detalleErrores };
         }
     }
     catch (error)
     {
-        console.error("Error fetching finished rentals:", error);
+        return { success: false, error: "No se pudo ingresar el arriendo" };
+    }
+}
+
+export async function elimArriendo(arriendoId: number) 
+{
+    try
+    {
+        const url = `${import.meta.env.VITE_API_URL}/arriendos/${arriendoId}`;        
+        await axios.delete(url);        
+        return { success: true };
+    }
+    catch (error)
+    {
+        return { success: false, error: "No se pudo eliminar el arriendo" };
+    }
+}
+
+export async function devolArriendo(arriendoId: number) 
+{
+    try
+    {        
+        const url = `${import.meta.env.VITE_API_URL}/arriendos/${arriendoId}`;        
+        await axios.patch(url);        
+        return { success: true };
+    }
+    catch (error)
+    {
+        return { success: false, error: "No se pudo devolver el arriendo" };
     }
 }
