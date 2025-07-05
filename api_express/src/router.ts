@@ -2,8 +2,7 @@
 import {Router} from "express";
 import { 
     devolArriendo, 
-    elimArriendo, 
-    getArriendoById, 
+    elimArriendo,  
     getArriendos, 
     getArriendosActivos, 
     getArriendosPorTipoV, 
@@ -34,8 +33,5 @@ router.patch("/arriendos/:id", devolArriendo)
 
 // Eliminar arriendo
 router.delete("/arriendos/:id", elimArriendo)
-
-// Siempre las rutas con variables al final, asi se invocan los endpoints correctos
-router.get("/arriendos/:id", getArriendoById)
 
 export default router
