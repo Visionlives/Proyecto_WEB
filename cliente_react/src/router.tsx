@@ -6,6 +6,7 @@ import CrearUsuario from './views/CrearUsuario';
 import CambiarContrasenna from "./views/CambiarContrasenna";
 import ArriendosTerminados, {loader as loaderArriendosTerminados} from "./views/ArriendosTerminados";
 import Loader from "./components/Loader";
+import ArriendosPorTipo, {loader as loaderArriendosPorTipo} from "./views/ArriendosPorTipo";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,11 @@ export const router = createBrowserRouter([
                 index:true,
                 element:<Home />,
                 loader: loaderArriendosActivos,
+            },
+            {
+                path: 'arriendos/tipos',
+                element:<ArriendosPorTipo/>,
+                loader: loaderArriendosPorTipo,                
             },
             {
                 path: 'arriendos/terminados',

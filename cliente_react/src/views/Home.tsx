@@ -21,17 +21,18 @@ export default function Home()
         await elimArriendo(arriendoId);
         //filter genera una nueva lista filtrada
         setArriendos(arriendosActivos.filter(arr => arr.id !== arriendoId));
+        // setArriendosTipos(arriendosActivosTipos.filter(arr => arr.arriendos !== arriendoId));
     }
 
     const handleDevolver = async (arriendoId:number) =>
     {
         await devolArriendo(arriendoId);
         setArriendos(arriendosActivos.filter(arr => arr.id !== arriendoId));
-    }
-
+    }    
+   
     return (
-        <>
-            <div className="container-xxl flex-grow-1 container-p-y">    
+        <>            
+            <div className="container-xxl flex-grow-1 container-p-y">                    
                 <div className="card">
                     <h5 className="card-header">Arriendos activos</h5>
                     <div className="table-responsive text-nowrap">

@@ -39,14 +39,23 @@ export const IngresoArriendoSchema = object
     }
 );
 
+export const ArriendoActivoTiposSchema = object
+(
+    {
+        tipo_Vehiculo: string(),
+        arriendos: number(),
+    }
+);
+
     //Este Schema es para traer los datos de toda la tabla del api de arrendamiento activos
 export const ArriendosActivosSchema = array(ArriendoActivoSchema);
 export const ArriendosTerminadosSchema = array(ArriendoTerminadoSchema);
-//export const ArriendosTerminadosSchema = object({})
+export const ArriendosActivosTiposSchema = array(ArriendoActivoTiposSchema);
 
 //Types 
     //Un objeto que entiende los atributos del schema ArriendoActivoSchema
 export type ArriendoActivo = InferOutput<typeof ArriendoActivoSchema>;
 export type ArriendoTerminado = InferOutput<typeof ArriendoTerminadoSchema>;
+export type ArriendoActivoTipos = InferOutput<typeof ArriendoActivoTiposSchema>;
 
 //export type ArriendosActivos = InferOutput<typeof ArriendosActivosSchema>;

@@ -16,12 +16,16 @@ export default function NavBarLateral() {
                     <div className="menu-link">
                         <div className="text-truncate">Arriendos</div>
                     </div>
+                    <NavLink to="/arriendos/tipos" className="menu-link" style={{ marginLeft: 32 }}>
+                        <div className="text-truncate">Tipos</div>
+                    </NavLink>
                     <NavLink to="arriendos/registrar" className="menu-link" style={{ marginLeft: 32 }}>
                         <div className="text-truncate">Registrar</div>
                     </NavLink>
                     <NavLink to="/arriendos/terminados" className="menu-link" style={{ marginLeft: 32 }}>
                         <div className="text-truncate">Devoluciones</div>
                     </NavLink>
+                    
                 </li>
 
                 {/* Usuario */}

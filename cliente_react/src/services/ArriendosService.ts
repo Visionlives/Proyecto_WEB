@@ -1,6 +1,6 @@
 import axios from "axios";
 import { safeParse } from "valibot";
-import { ArriendosActivosSchema, ArriendosTerminadosSchema, IngresoArriendoSchema } from "../types/arriendos";
+import { ArriendosActivosSchema, ArriendosActivosTiposSchema, ArriendosTerminadosSchema, IngresoArriendoSchema } from "../types/arriendos";
 
 export async function getArriendosActivos() 
 {
@@ -112,4 +112,26 @@ export async function devolArriendo(arriendoId: number)
     {
         return { success: false, error: "No se pudo devolver el arriendo" };
     }
+}
+
+export async function getArriendosPorTipoV() 
+{
+    try
+    {
+        const url = `${import.meta.env.VITE_API_URL}/arriendos/por-tipo-v`; 
+        const {data:arriendos} = await axios.get(url);
+        const resultado = safeParse(ArriendosActivosTiposSchema, arriendos.data);
+        if (resultado.success) 
+        {
+            return resultado.output;
+        } 
+        else 
+        {
+            throw new Error("Ocurrio un problema al solicitar los datos");
+        }   
+    }   
+    catch (error) 
+    {
+        console.error("Error fetching active rentals:", error);       
+    }  
 }
