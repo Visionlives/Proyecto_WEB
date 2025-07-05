@@ -1,5 +1,6 @@
 import { Form, redirect, type ActionFunctionArgs } from "react-router-dom"
 import { ingreArriendo } from "../services/ArriendosService";
+import { useRef } from "react";
 
 export async function action({request}: ActionFunctionArgs)
 {
@@ -14,20 +15,19 @@ export async function action({request}: ActionFunctionArgs)
 }
 
 export default function RegistrarArriendo() {
-    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
-    // // Aquí puedes acceder a los datos del formulario y hacer lo que necesites
-    // // Por ejemplo: enviar a una API, mostrar un mensaje, etc.
+    const formRef = useRef<HTMLFormElement | null>(null) ;
+    const handleReset = () => 
+    {
+      formRef.current?.reset();
+    }
 
-    //       //Hay que crear un string el cual cambie el rut, elimine los puntos.
-    // };
     return ( 
         <>
             <div className="container-xxl flex-grow-1 container-p-y">                  
               <div className="card mb-6">                
                 <div className="card-body pt-4">
                   <h5 className="card-title text-primary mb-3">Ingresa los datos del nuevo arriendo</h5>
-                  <Form id="formAccountSettings" method="POST">
+                  <Form id="formAccountSettings" method="POST" ref={formRef}>
                     <div className="row g-6">                         
                       <div className="col-md-6">
                         {/* htmlFor = *id del input*: hace que al clickear el label te mande al input */}
@@ -58,7 +58,8 @@ export default function RegistrarArriendo() {
                       </div>                                                                                                                       
                     </div>
                     <div className="mt-6">
-                      <button type="submit" className="btn btn-primary me-3 btn-success">Crear arriendo</button>                      
+                      <button type="submit" className="btn me-3 btn-success">Crear arriendo</button>                      
+                      <button type="button" className="btn btn-primary me-3" onClick={handleReset}>Restablecer</button>                      
                     </div>
                   </Form>
                 </div>

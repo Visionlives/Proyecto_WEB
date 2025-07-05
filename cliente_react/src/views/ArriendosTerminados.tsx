@@ -11,7 +11,8 @@ export async function loader()
 
 export default function Home()
 {
-    const arriendosTerminados = useLoaderData() as ArriendoTerminado[];
+    const arriendosTerminados = useLoaderData() as ArriendoTerminado[];    
+        
     return (
         <>
             <div className="container-xxl flex-grow-1 container-p-y">    
