@@ -19,7 +19,7 @@ export default function NavBarLateral() {
                     <NavLink to="arriendos/registrar" className="menu-link" style={{ marginLeft: 32 }}>
                         <div className="text-truncate">Registrar</div>
                     </NavLink>
-                    <NavLink to="/arriendos/devoluciones" className="menu-link" style={{ marginLeft: 32 }}>
+                    <NavLink to="/arriendos/terminados" className="menu-link" style={{ marginLeft: 32 }}>
                         <div className="text-truncate">Devoluciones</div>
                     </NavLink>
                 </li>

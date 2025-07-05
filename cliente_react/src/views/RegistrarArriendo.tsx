@@ -1,35 +1,66 @@
+import { Form, redirect, type ActionFunctionArgs } from "react-router-dom"
+import { ingreArriendo } from "../services/ArriendosService";
+
+export async function action({request}: ActionFunctionArgs)
+{
+    const formData = Object.fromEntries(await request.formData());
+    const resultado = await ingreArriendo(formData);
+
+    if (!resultado?.success)
+    {
+        return resultado;
+    } 
+    return redirect('/');
+}
+
 export default function RegistrarArriendo() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Aquí puedes acceder a los datos del formulario y hacer lo que necesites
-    // Por ejemplo: enviar a una API, mostrar un mensaje, etc.
-    };
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // event.preventDefault();
+    // // Aquí puedes acceder a los datos del formulario y hacer lo que necesites
+    // // Por ejemplo: enviar a una API, mostrar un mensaje, etc.
+
+    //       //Hay que crear un string el cual cambie el rut, elimine los puntos.
+    // };
     return ( 
         <>
             <div className="container-xxl flex-grow-1 container-p-y">                  
               <div className="card mb-6">                
                 <div className="card-body pt-4">
                   <h5 className="card-title text-primary mb-3">Ingresa los datos del nuevo arriendo</h5>
-                  <form id="formAccountSettings" method="POST" onSubmit={handleSubmit}>
+                  <Form id="formAccountSettings" method="POST">
                     <div className="row g-6">                         
                       <div className="col-md-6">
-                        <label htmlFor="email" className="form-label">E-mail</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="email"
-                          name="email"                              
-                          placeholder="don.juanito@example.com" />
-                      </div>                                                                          
+                        {/* htmlFor = *id del input*: hace que al clickear el label te mande al input */}
+                        {/* Patente vehiculo */}
+                        <label htmlFor="patenteVehiculo" className="form-label">Patente para el vehiculo</label>
+                        <input className="form-control" type="text" id="patenteVehiculo" name="patenteVehiculo" placeholder="XXXX-XX" />
+                      </div>  
+                      {/* Tipo vehiculo "combobox"*/}
                       <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">Contraseña</label>
-                        <input className="form-control" type="password" id="password" name="password" />
+                        
+                        <label htmlFor="tipoVehiculo" className="form-label">Tipo del vehiculo</label>
+                        <select className="form-select" id="tipoVehiculo" name="tipoVehiculo">
+                          <option value="" >Seleccione un tipo de vehiculo</option>
+                          <option value="Sedan">Sedán</option>
+                          <option value="SUV">SUV</option>
+                          <option value="Camioneta">Camioneta</option>                          
+                        </select>                        
+                      </div>           
+                      {/* Rut cliente */}
+                      <div className="col-md-6">
+                        <label htmlFor="rutCliente" className="form-label">Rut del cliente</label>
+                        <input className="form-control" type="text" id="rutCliente" name="rutCliente" placeholder="XXXXXXXX-X"/>
+                      </div>         
+                      {/* Nombre Cliente   */}
+                      <div className="col-md-6">
+                        <label htmlFor="nombreCliente" className="form-label">Nombre del cliente</label>
+                        <input className="form-control" type="text" id="nombreCliente" name="nombreCliente" placeholder="Juanito" />
                       </div>                                                                                                                       
                     </div>
                     <div className="mt-6">
-                      <button type="submit" className="btn btn-primary me-3">Crear cuenta</button>                      
+                      <button type="submit" className="btn btn-primary me-3 btn-success">Crear arriendo</button>                      
                     </div>
-                  </form>
+                  </Form>
                 </div>
               </div>                  
             </div>

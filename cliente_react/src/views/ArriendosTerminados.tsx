@@ -1,22 +1,22 @@
 import { useLoaderData } from "react-router-dom";
-import { getArriendosActivos } from "../services/ArriendosService";
-import type { ArriendoActivo } from "../types/arriendos";
-import ArriendoActivoFila from "../components/ArriendoActivoFila";
+import { getArriendosTerminados } from "../services/ArriendosService";
+import type { ArriendoTerminado } from "../types/arriendos";
+import ArriendoTerminadoFila from "../components/ArriendoTerminadoFila";
 
 export async function loader()
 {
-    const arriendosActivos = await getArriendosActivos();
-    return arriendosActivos;
+    const arriendosTerminados = await getArriendosTerminados();
+    return arriendosTerminados;
 };
 
 export default function Home()
 {
-    const arriendosActivos = useLoaderData() as ArriendoActivo[];
+    const arriendosTerminados = useLoaderData() as ArriendoTerminado[];
     return (
         <>
             <div className="container-xxl flex-grow-1 container-p-y">    
                 <div className="card">
-                    <h5 className="card-header">Arriendos activos</h5>
+                    <h5 className="card-header">Arriendos terminados</h5>
                     <div className="table-responsive text-nowrap">
                         <table className="table">
                             <thead className="table-light">
@@ -27,13 +27,14 @@ export default function Home()
                                     <th>Rut Cliente</th>
                                     <th>Nombre Cliente</th>
                                     <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody className="table-border-bottom-0">
-                                {arriendosActivos.map((arriendosActivos, index) => 
+                                {arriendosTerminados.map((arriendosTerminados, index) => 
                                 (
-                                    <ArriendoActivoFila key={arriendosActivos.id} index={index} arriendoActivo={arriendosActivos} />
+                                    <ArriendoTerminadoFila key={arriendosTerminados.id} index={index} arriendoTerminado={arriendosTerminados} />
                                 ))}
                             </tbody>
                         </table>

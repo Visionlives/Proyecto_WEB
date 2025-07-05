@@ -21,10 +21,25 @@ export default function CrearUsuario() {
                           name="email"                              
                           placeholder="don.juanito@example.com" />
                       </div>                                                                          
+                      {/* eliminar/ver despues
                       <div className="col-md-6">
                         <label htmlFor="password" className="form-label">Contraseña</label>
                         <input className="form-control" type="password" id="password" name="password" />
-                      </div>                                                                                                                       
+                        <span className="input-group-text cursor-pointer"><i className="icon-base bx bx-hide"></i></span>
+                      </div>*/}
+                      <div className="col-md-6 form-password-toggle">
+                          <label className="form-label" htmlFor="password">Contraseña</label>
+                          <div className="input-group input-group-merge">
+                            <input
+                              type="password"
+                              id="password"
+                              className="form-control"
+                              name="password"
+                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                              aria-describedby="password" />
+                            <span className="input-group-text cursor-pointer"><i className="icon-base bx bx-hide"></i></span>
+                            </div>
+                      </div>
                     </div>
                     <div className="mt-6">
                       <button type="submit" className="btn btn-primary me-3">Crear cuenta</button>                      
