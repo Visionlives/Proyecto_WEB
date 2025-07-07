@@ -8,14 +8,14 @@ export default function CrearUsuario() {
       formRef.current?.reset();
     }
 
-    return ( 
+    return( 
         <>
             <div className="container-xxl flex-grow-1 container-p-y">                  
               <div className="card mb-6">                
                 <div className="card-body pt-4">
                   <h5 className="card-title text-primary mb-3">Ingresa los datos para crear un nuevo usuario</h5>
                   <Form id="formAccountSettings" method="POST" ref={formRef}>
-                    <div className="row g-6">                         
+                    <div className="row g-6">
                       <div className="col-md-6">
                         <label htmlFor="email" className="form-label">E-mail</label>
                         <input
@@ -25,12 +25,6 @@ export default function CrearUsuario() {
                           name="email"                              
                           placeholder="don.juanito@example.com" />
                       </div>                                                                          
-                      {/* eliminar/ver despues
-                      <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">Contraseña</label>
-                        <input className="form-control" type="password" id="password" name="password" />
-                        <span className="input-group-text cursor-pointer"><i className="icon-base bx bx-hide"></i></span>
-                      </div>*/}
                       <div className="col-md-6 form-password-toggle">
                           <label className="form-label" htmlFor="password">Contraseña</label>
                           <div className="input-group input-group-merge">
@@ -40,8 +34,7 @@ export default function CrearUsuario() {
                               className="form-control"
                               name="password"
                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                              aria-describedby="password" />
-                            <span className="input-group-text cursor-pointer"><i className="icon-base bx bx-hide"></i></span>
+                              aria-describedby="password" />                            
                             </div>
                       </div>
                     </div>

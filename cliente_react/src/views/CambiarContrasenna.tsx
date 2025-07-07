@@ -18,16 +18,16 @@ export default function CambiarContrasenna()
                   <Form id="formAccountSettings" method="POST" ref={formRef}>
                     <div className="row g-6">                         
                       <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">Contraseña actual</label>
-                        <input className="form-control" type="password" id="passwordActual" name="password" />
+                        <label htmlFor="passwordActual" className="form-label">Contraseña actual</label>
+                        <input className="form-control" type="password" id="passwordActual" name="passwordActual" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
                       </div>                                                                          
                       <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">Nueva contraseña</label>
-                        <input className="form-control" type="password" id="passwordNueva" name="password" />
+                        <label htmlFor="passwordNueva" className="form-label">Nueva contraseña</label>
+                        <input className="form-control" type="password" id="passwordNueva" name="passwordNueva" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
                       </div>   
                       <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">Confirma nueva contraseña</label>
-                        <input className="form-control" type="password" id="passwordNuevaConf" name="password" />
+                        <label htmlFor="passwordNuevaConf" className="form-label">Confirma nueva contraseña</label>
+                        <input className="form-control" type="password" id="passwordNuevaConf" name="passwordNuevaConf" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
                       </div>                                                                                                                       
                     </div>
                     <div className="mt-6">

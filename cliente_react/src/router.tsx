@@ -7,8 +7,13 @@ import CambiarContrasenna from "./views/CambiarContrasenna";
 import ArriendosTerminados, {loader as loaderArriendosTerminados} from "./views/ArriendosTerminados";
 import Loader from "./components/Loader";
 import ArriendosPorTipo, {loader as loaderArriendosPorTipo} from "./views/ArriendosPorTipo";
+import Login from "./views/Login";
 
 export const router = createBrowserRouter([
+    {
+        path: "/login",
+        element: <Login/>,
+    },
     {
         path: "/",
         element: <Layout/>,
@@ -41,7 +46,7 @@ export const router = createBrowserRouter([
             {
                 path: 'usuario/editar',
                 element: <CambiarContrasenna />
-            }            
+            }
         ]
     }
 ])
