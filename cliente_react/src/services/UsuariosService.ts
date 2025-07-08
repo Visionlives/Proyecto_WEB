@@ -101,11 +101,7 @@ export async function cambiarPassword(formData: CambiarContraseñaFormData)
         console.log("El email es: " + formData.email);
         const resultado = safeParse(CambioContrasennaSchema, formData);
                 
-        if (formData.passN !== formData.passNC)
-        {
-            return { success: false, error: "Las nuevas contraseñas no son iguales"};
-        }
-        else if (!resultado.success)
+        if (!resultado.success)
         {
             const detalleErrores: Record<string, string[]> = {}
             
