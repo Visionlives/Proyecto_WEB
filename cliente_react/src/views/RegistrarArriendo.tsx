@@ -42,8 +42,7 @@ export default function RegistrarArriendo() {
                   }
                   <Form id="formAccountSettings" method="POST" ref={formRef}>
                     <div className="row g-6">                         
-                      <div className="col-md-6">
-                        {/* htmlFor = *id del input*: hace que al clickear el label te mande al input */}
+                      <div className="col-md-6">                        
                         {/* Patente vehiculo */}
                         <label htmlFor="patenteVehiculo" className="form-label">Patente para el vehiculo</label>
                         <input className={`form-control ${actionData?.detalleErrores?.patenteVehiculo ?`is-invalid` : ''}`} type="text" id="patenteVehiculo" name="patenteVehiculo" placeholder="XXXX-XX" />
