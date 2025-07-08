@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function NavBarLateral() {
     const handleLogout = () => {
         localStorage.removeItem('token');        
+        localStorage.removeItem('emailLocal');
     }
 
     return (        

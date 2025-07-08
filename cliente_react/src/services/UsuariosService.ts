@@ -18,7 +18,7 @@ export async function login(formData: UsuarioFormData)
             const url = `/login`; 
             const {data} = await axios.post(url, resultado.output);
             localStorage.setItem('token', data.token);  
-            localStorage.setItem('email', data.email);
+            localStorage.setItem('emailLocal', data.email);
             return {success: true};
         } 
         else 
@@ -92,18 +92,43 @@ export async function cambiarPassword(formData: CambiarContraseñaFormData)
 {
     try
     {   
-        const email = localStorage.getItem('email');
+        const email = localStorage.getItem('emailLocal');
         if (!email) {
             return { success: false, error: "No hay email en sesión" };
         }
-        const url = `/usuario/cambiar-password`;
+        
         formData.email = email;
         console.log("El email es: " + formData.email);
         const resultado = safeParse(CambioContrasennaSchema, formData);
-        
-        await axios.patch(url, resultado.output);
-        //await axios.patch(url);        
-        return { success: true };
+                
+        if (formData.passN !== formData.passNC)
+        {
+            return { success: false, error: "Las nuevas contraseñas no son iguales"};
+        }
+        else if (!resultado.success)
+        {
+            const detalleErrores: Record<string, string[]> = {}
+            
+            for (const issue of resultado.issues) 
+            {
+                const campo = issue.path![0].key as string
+                if (!detalleErrores[campo]) 
+                {
+                    detalleErrores[campo] = [];
+                }
+                detalleErrores[campo].push(issue.message);
+            }
+            console.log(detalleErrores[0]);
+            return { success: false, error: "El formulario contiene errores", detalleErrores: detalleErrores };
+        }   
+        else
+        {
+            const url = `/usuario/cambiar-password`;
+
+            await axios.patch(url, resultado.output);
+
+            return {success: true};
+        } 
     }
     catch (error)
     {
