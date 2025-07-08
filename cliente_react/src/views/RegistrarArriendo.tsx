@@ -22,6 +22,7 @@ export default function RegistrarArriendo() {
       detalleErrores: { [key: string]: string[] }
     };
 
+    //Para resetear
     const formRef = useRef<HTMLFormElement | null>(null) ;
     const handleReset = () => 
     {

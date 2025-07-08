@@ -20,7 +20,7 @@ export async function getArriendosActivos()
     }   
     catch (error) 
     {
-        console.error("Error fetching active rentals:", error);       
+        console.error("El error al obtener: ", error);
     }  
 }
 
@@ -42,7 +42,7 @@ export async function getArriendosTerminados()
     }   
     catch (error) 
     {
-        console.error("Error fetching active rentals:", error);       
+        console.error("El error al obtener: ", error);
     }  
 }
 
@@ -132,6 +132,6 @@ export async function getArriendosPorTipoV()
     }   
     catch (error) 
     {
-        console.error("Error fetching active rentals:", error);       
+        console.error("El error al obtener: ", error);      
     }  
 }

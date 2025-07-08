@@ -7,7 +7,10 @@ export function PrivateRoute()
     const token = localStorage.getItem("token");
 
     useEffect(()=>{
-        navigate("/login")
+        if (!token)
+        {
+            navigate("/login")
+        }        
     },[token, navigate]);
 
     return token ? <Outlet /> : null;
