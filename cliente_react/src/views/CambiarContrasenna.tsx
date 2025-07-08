@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import {Form, redirect, useActionData, type ActionFunctionArgs} from "react-router-dom";
+import { cambiarPassword } from "../services/UsuariosService";
 
 export async function action({request}: ActionFunctionArgs)
 {
     const formData = Object.fromEntries(await request.formData());
-    const resultado = await ingreArriendo(formData); //Poner aqui nueva function de UsuariosService
+    const resultado = await cambiarPassword(formData); //Poner aqui nueva function de UsuariosService
 
-    if (!resultado?.success)
+    if (!resultado.success)
     {
         return resultado;
     } 
@@ -16,11 +17,12 @@ export async function action({request}: ActionFunctionArgs)
 export default function CambiarContrasenna() 
 {
   const actionData = useActionData() as 
-    {
-      success?: boolean 
-      error?: string 
-      detalleErrores: { [key: string]: string[] }
-    };
+  {
+    success?: boolean 
+    error?: string 
+    detalleErrores: { [key: string]: string[] }
+  };
+
   const formRef = useRef<HTMLFormElement | null>(null) ;
   const handleReset = () => 
   {
@@ -40,19 +42,19 @@ export default function CambiarContrasenna()
                 <Form id="formAccountSettings" method="POST" ref={formRef}>
                   <div className="row g-6">                         
                     <div className="col-md-6">
-                      <label htmlFor="contrasennaActual" className="form-label">Contraseña actual</label>
-                      <input className={`form-control ${actionData?.detalleErrores?.contrasennaActual ?`is-invalid` : ''}`} type="password" id="contrasennaActual" name="contrasennaActual" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
-                      {'contrasennaActual' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.contrasennaActual[0]} </div>)}
+                      <label htmlFor="password" className="form-label">Contraseña actual</label>
+                      <input className={`form-control ${actionData?.detalleErrores?.password ?`is-invalid` : ''}`} type="password" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
+                      {'password' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.password[0]} </div>)}
                     </div>                                                                          
                     <div className="col-md-6">
-                      <label htmlFor="contrasennaNueva" className="form-label">Nueva contraseña</label>
-                      <input className={`form-control ${actionData?.detalleErrores?.contrasennaNueva ?`is-invalid` : ''}`} type="password" id="contrasennaNueva" name="contrasennaNueva" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
-                      {'contrasennaNueva' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.contrasennaNueva[0]} </div>)}
+                      <label htmlFor="passN" className="form-label">Nueva contraseña</label>
+                      <input className={`form-control ${actionData?.detalleErrores?.passN ?`is-invalid` : ''}`} type="password" id="passN" name="passN" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
+                      {'passN' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.passN[0]} </div>)}
                     </div>   
                     <div className="col-md-6">
-                      <label htmlFor="contrasennaNuevaConf" className="form-label">Confirma nueva contraseña</label>
-                      <input className={`form-control ${actionData?.detalleErrores?.contrasennaNuevaConf ?`is-invalid` : ''}`} type="password" id="contrasennaNuevaConf" name="contrasennaNuevaConf" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
-                      {'contrasennaNuevaConf' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.contrasennaNuevaConf[0]} </div>)}
+                      <label htmlFor="passNC" className="form-label">Confirma nueva contraseña</label>
+                      <input className={`form-control ${actionData?.detalleErrores?.passNC ?`is-invalid` : ''}`} type="password" id="passNC" name="passNC" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"/>
+                      {'passNC' in (actionData?.detalleErrores || {}) && (<div className="invalid-feedback"> {actionData?.detalleErrores?.passNC[0]} </div>)}
                     </div>                                                                                                                       
                   </div>
                   <div className="mt-6">

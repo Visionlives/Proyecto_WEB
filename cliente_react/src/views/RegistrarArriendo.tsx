@@ -7,7 +7,7 @@ export async function action({request}: ActionFunctionArgs)
     const formData = Object.fromEntries(await request.formData());
     const resultado = await ingreArriendo(formData);
 
-    if (!resultado?.success)
+    if (!resultado.success)
     {
         return resultado;
     } 

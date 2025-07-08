@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Home, {loader as loaderArriendosActivos} from './views/Home';
 import RegistrarArriendo, {action as actionIngresarArriendo} from './views/RegistrarArriendo';
-import CrearUsuario from './views/CrearUsuario';
-import CambiarContrasenna from "./views/CambiarContrasenna";
+import CrearUsuario, {action as actionCrearUsuario} from './views/CrearUsuario';
+import CambiarContrasenna, {action as actionCambiarContrasenna} from "./views/CambiarContrasenna";
 import ArriendosTerminados, {loader as loaderArriendosTerminados} from "./views/ArriendosTerminados";
 import Loader from "./components/Loader";
 import ArriendosPorTipo, {loader as loaderArriendosPorTipo} from "./views/ArriendosPorTipo";
@@ -27,30 +27,32 @@ export const router = createBrowserRouter([
                         {
                             index:true,
                             element:<Home />,
-                            loader: loaderArriendosActivos,
+                            loader: loaderArriendosActivos
                         },
                         {
                             path: 'arriendos/tipos',
                             element:<ArriendosPorTipo/>,
-                            loader: loaderArriendosPorTipo,                
+                            loader: loaderArriendosPorTipo                
                         },
                         {
                             path: 'arriendos/terminados',
                             element:<ArriendosTerminados/>,
-                            loader: loaderArriendosTerminados,
+                            loader: loaderArriendosTerminados
                         },
                         {
                             path: 'arriendos/registrar',
                             element: <RegistrarArriendo />,
-                            action: actionIngresarArriendo,
+                            action: actionIngresarArriendo
                         },
                         {
                             path: 'usuario/crear',
-                            element: <CrearUsuario />
+                            element: <CrearUsuario />,
+                            action: actionCrearUsuario
                         },
                         {
                             path: 'usuario/editar',
-                            element: <CambiarContrasenna />
+                            element: <CambiarContrasenna />,
+                            action: actionCambiarContrasenna
                         }
                 ]
             }

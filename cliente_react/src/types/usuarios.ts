@@ -1,4 +1,4 @@
-import { nonEmpty, object, pipe, string, maxLength, custom, email, minLength } from "valibot";
+import { nonEmpty, object, pipe, string, maxLength, custom, email, minLength, nullable } from "valibot";
 
 export const LoginFormSchema = object
 (
@@ -18,18 +18,19 @@ export const LoginFormSchema = object
 // );
 
 // Es primero pipe, para validar entre campos
-export const CambioContraseñaSchema = pipe(
+export const CambioContrasennaSchema = pipe(
   object(
     {
-      contrasennaActual: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres')),
-      contrasennaNueva: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres'), maxLength(60, 'La nueva contraseña no puede contener más de 100 dígitos')),
-      contrasennadNuevaConf: pipe(string(), nonEmpty('La confirmación no puede estar vacía')),
+      email: nullable(string()),
+      password: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres')),
+      passN: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres'), maxLength(60, 'La nueva contraseña no puede contener más de 100 dígitos')),
+      passNC: pipe(string(), nonEmpty('La confirmación no puede estar vacía')),
     }),
   custom(
     (data) => 
     {
-        const d = data as { contrasennaNueva: string; contrasennadNuevaConf: string };
-        return d.contrasennaNueva === d.contrasennadNuevaConf;
+        const d = data as { passN: string; passNC: string };
+        return d.passN === d.passNC;
     },
     'La confirmación de la contraseña no coincide'
     )

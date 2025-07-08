@@ -7,7 +7,7 @@ export async function action({request}: ActionFunctionArgs)
     const formData = Object.fromEntries(await request.formData());
     const resultado = await crearUsuario(formData); //Poner aqui nueva function de UsuariosService
 
-    if (!resultado?.success)
+    if (!resultado.success)
     {
         return resultado;
     } 
