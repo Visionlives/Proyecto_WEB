@@ -38,7 +38,7 @@ export const crearUsuario = async (request: Request, response: Response) => {
         }
 
         const nuevoUsuario = await Usuario.create({email, password})
-        response.status(501).json({message: "Usuario creado exitosamente"})
+        response.status(201).json({message: "Usuario creado exitosamente"})
     } catch (error) {
         console.error("Error en el registro Don Juanito :c ", error)
         response.status(500).json({error: "Error interno de la automotora :c"})
