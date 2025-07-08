@@ -8,8 +8,16 @@ import {
     getArriendosPorTipoV, 
     getArriendosTerminados, 
     ingreArriendo } from "./handlers/arriendos";
+import { crearUsuario, login } from "./handlers/usuarios";
+import { verificarToken } from "./middleware/verificarToken";
 
 const router = Router()
+
+// Middleware
+
+router.post("/login", login)
+
+router.use(verificarToken)
 
 // Endpoints de los Arriendos
 
@@ -33,5 +41,8 @@ router.patch("/arriendos/:id", devolArriendo)
 
 // Eliminar arriendo
 router.delete("/arriendos/:id", elimArriendo)
+
+// Crear usuario
+router.post("/usuario/crear", crearUsuario)
 
 export default router
