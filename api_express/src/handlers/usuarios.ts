@@ -8,7 +8,7 @@ export const login = async (request: Request, response: Response) => {
     const SECRET = process.env.SECRET_KEY
 
     try {
-        // Vemos si un usuario con estas credenciales
+        // Vemos si hay un usuario con estas credenciales
         const usuario = await Usuario.findByPk(email)
 
         if (!usuario || !bcrypt.compareSync(password, usuario.password)){
@@ -42,5 +42,29 @@ export const crearUsuario = async (request: Request, response: Response) => {
     } catch (error) {
         console.error("Error en el registro Don Juanito :c ", error)
         response.status(500).json({error: "Error interno de la automotora :c"})
+    }
+}
+
+export const cambiarPassword = async (request: Request, response: Response) => {
+    const {email, password, passN, passNC} = request.body
+    
+    try {
+        // Vemos si hay un usuario con estas credenciales
+        const usuario = await Usuario.findByPk(email)
+    
+        if (!bcrypt.compareSync(password, usuario.password)){
+            response.status(401).json({error: "Password incorrecta :c"})
+        }
+
+        if (passN === passNC){
+            usuario.password = await bcrypt.hash(passN, 10)
+        } 
+
+        await usuario.save()
+
+        response.json("Password cambiada de manera exitosa c:")
+    } catch (error) {
+        console.error("Error en el servidor de Don Juanito al cambiar password :c ", error)
+        response.status(500).json({error: "Error interno en el servidor de Don Juanito al cambiar password :c"})
     }
 }

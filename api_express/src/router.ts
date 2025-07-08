@@ -8,7 +8,7 @@ import {
     getArriendosPorTipoV, 
     getArriendosTerminados, 
     ingreArriendo } from "./handlers/arriendos";
-import { crearUsuario, login } from "./handlers/usuarios";
+import { cambiarPassword, crearUsuario, login } from "./handlers/usuarios";
 import { verificarToken } from "./middleware/verificarToken";
 
 const router = Router()
@@ -44,5 +44,8 @@ router.delete("/arriendos/:id", elimArriendo)
 
 // Crear usuario
 router.post("/usuario/crear", crearUsuario)
+
+// Cambiar password
+router.post("/usuario/cambiar-password", cambiarPassword)
 
 export default router
