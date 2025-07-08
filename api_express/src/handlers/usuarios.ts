@@ -17,7 +17,7 @@ export const login = async (request: Request, response: Response) => {
 
         // Todo correcto hasta aca
         const token = jwt.sign({email: usuario.email}, SECRET, {expiresIn: "1h"})
-        response.json({token})
+        response.json({token, email})
     } catch (error) {
         console.error("Error en el servidor de Don Juanito al iniciar sesion :c ", error)
         response.status(500).json({error: "Error interno en el servidor de Don Juanito :c"})
@@ -50,21 +50,24 @@ export const cambiarPassword = async (request: Request, response: Response) => {
     
     try {
         // Vemos si hay un usuario con estas credenciales
-        const usuario = await Usuario.findByPk(email)
-    
+        const usuario = await Usuario.findByPk(email);
+
         if (!bcrypt.compareSync(password, usuario.password)){
-            response.status(401).json({error: "Password incorrecta :c"})
+            response.status(401).json({error: "Password incorrecta :c"});
+            return;
         }
 
-        if (passN === passNC){
-            usuario.password = await bcrypt.hash(passN, 10)
-        } 
+        if (passN !== passNC) {
+            response.status(400).json({error: "Las nuevas contraseñas no coinciden :c"});
+            return;
+        }
 
-        await usuario.save()
+        usuario.password = await bcrypt.hash(passN, 10);
+        await usuario.save();
 
-        response.json("Password cambiada de manera exitosa c:")
+        response.json("Password cambiada de manera exitosa c:");
     } catch (error) {
-        console.error("Error en el servidor de Don Juanito al cambiar password :c ", error)
-        response.status(500).json({error: "Error interno en el servidor de Don Juanito al cambiar password :c"})
+        console.error("Error en el servidor de Don Juanito al cambiar password :c ", error);
+        response.status(500).json({error: "Error interno en el servidor de Don Juanito al cambiar password :c"});
     }
 }
