@@ -1,10 +1,10 @@
-import { nonEmpty, object, pipe, string, maxLength, custom, email } from "valibot";
+import { nonEmpty, object, pipe, string, maxLength, custom, email, minLength } from "valibot";
 
 export const LoginFormSchema = object
 (
     {
-        email: pipe(string(), nonEmpty('El email no puede estar vacio'), email('Correo no valido.'), maxLength(50, 'El correo no puede contener más de 50 digitos')),  
-        password: pipe(string(), nonEmpty('La contraseña no puede estar vacia'), maxLength(60, 'La contraseña no puede contener más de 60 digitos')),  
+      email: pipe(string(), nonEmpty('El email no puede estar vacio'), email('Correo no valido.'), maxLength(50, 'El correo no puede contener más de 50 digitos')),  
+      password: pipe(string(), nonEmpty('La contraseña no puede estar vacia'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres'), maxLength(60, 'La contraseña no puede contener más de 60 digitos')),  
     }
 );
 
@@ -21,9 +21,9 @@ export const LoginFormSchema = object
 export const CambioContraseñaSchema = pipe(
   object(
     {
-    contrasennaActual: pipe(string(), nonEmpty('La contraseña no puede estar vacía')),
-    contrasennaNueva: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), maxLength(60, 'La nueva contraseña no puede contener más de 100 dígitos')),
-    contrasennadNuevaConf: pipe(string(), nonEmpty('La confirmación no puede estar vacía')),
+      contrasennaActual: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres')),
+      contrasennaNueva: pipe(string(), nonEmpty('La contraseña no puede estar vacía'), minLength(6, 'La contraseña no puede tener menos de 6 caracteres'), maxLength(60, 'La nueva contraseña no puede contener más de 100 dígitos')),
+      contrasennadNuevaConf: pipe(string(), nonEmpty('La confirmación no puede estar vacía')),
     }),
   custom(
     (data) => 

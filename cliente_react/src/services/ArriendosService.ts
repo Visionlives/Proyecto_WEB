@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../services/axiosInstance';
 import { safeParse } from "valibot";
 import { ArriendosActivosSchema, ArriendosActivosTiposSchema, ArriendosTerminadosSchema, IngresoArriendoSchema } from "../types/arriendos";
 
@@ -6,7 +6,7 @@ export async function getArriendosActivos()
 {
     try
     {
-        const url = `${import.meta.env.VITE_API_URL}/arriendos/activos`; 
+        const url = `/arriendos/activos`; 
         const {data:arriendos} = await axios.get(url);
         const resultado = safeParse(ArriendosActivosSchema, arriendos.data);
         if (resultado.success) 
@@ -28,7 +28,7 @@ export async function getArriendosTerminados()
 {
     try
     {
-        const url = `${import.meta.env.VITE_API_URL}/arriendos/terminados`
+        const url = `/arriendos/terminados`
         const {data:arriendos} = await axios.get(url);
         const resultado = safeParse(ArriendosTerminadosSchema, arriendos.data);
         if (resultado.success) 
@@ -57,9 +57,8 @@ export async function ingreArriendo(formData: IngresarArriendoData )
     {
         const resultado = safeParse(IngresoArriendoSchema, formData);
         if (resultado.success) 
-        {
-            console.log("Error1");
-            const url = `${import.meta.env.VITE_API_URL}/arriendos`;
+        {            
+            const url = `/arriendos`;
             await axios.post(url, resultado.output);
             return {success: true};
         }
@@ -90,7 +89,7 @@ export async function elimArriendo(arriendoId: number)
 {
     try
     {
-        const url = `${import.meta.env.VITE_API_URL}/arriendos/${arriendoId}`;        
+        const url = `/arriendos/${arriendoId}`;        
         await axios.delete(url);        
         return { success: true };
     }
@@ -104,7 +103,7 @@ export async function devolArriendo(arriendoId: number)
 {
     try
     {        
-        const url = `${import.meta.env.VITE_API_URL}/arriendos/${arriendoId}`;        
+        const url = `/arriendos/${arriendoId}`;        
         await axios.patch(url);        
         return { success: true };
     }
@@ -118,7 +117,7 @@ export async function getArriendosPorTipoV()
 {
     try
     {
-        const url = `${import.meta.env.VITE_API_URL}/arriendos/por-tipo-v`; 
+        const url = `/arriendos/por-tipo-v`; 
         const {data:arriendos} = await axios.get(url);
         const resultado = safeParse(ArriendosActivosTiposSchema, arriendos.data);
         if (resultado.success) 

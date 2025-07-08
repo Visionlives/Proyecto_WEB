@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 export default function NavBarLateral() {
+    const handleLogout = () => {
+        localStorage.removeItem('token');        
+    }
+
     return (        
         <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
             {/* Arriendos */}
@@ -38,6 +42,9 @@ export default function NavBarLateral() {
                     </NavLink>
                     <NavLink to="/usuario/crear" className="menu-link" style={{ marginLeft: 32 }}>
                         <div className="text-truncate">Crear Usuario</div>
+                    </NavLink>
+                    <NavLink to="/login" className="menu-link" style={{ marginLeft: 32 }} onClick={handleLogout}>
+                        <div className="text-truncate text-danger">Cerrar sesión</div>
                     </NavLink>
                 </li>
             </ul>
