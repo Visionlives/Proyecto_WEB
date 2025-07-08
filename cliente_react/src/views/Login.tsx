@@ -19,7 +19,7 @@ export default function Login()
                                         className="form-control"
                                         id="email"
                                         name="emailUsuario"
-                                        placeholder="don.juanito@example.com"/>
+                                        placeholder="donpepe@example.com"/>
                                     </div>
                                     <div className="mb-6 form-password-toggle">
                                         <label className="form-label" htmlFor="password">Contraseña</label>

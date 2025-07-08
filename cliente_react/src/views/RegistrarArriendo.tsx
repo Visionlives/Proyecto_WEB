@@ -36,8 +36,7 @@ export default function RegistrarArriendo() {
                   <h5 className="card-title text-primary mb-3">Ingresa los datos del nuevo arriendo</h5>
 
                   {/* Div de error */}
-                  {actionData?.error && 
-                  
+                  {actionData?.error &&                   
                     <div className="alert alert-danger " >{actionData?.error}</div>
                   }
                   <Form id="formAccountSettings" method="POST" ref={formRef}>
