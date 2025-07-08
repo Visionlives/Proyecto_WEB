@@ -46,6 +46,6 @@ router.delete("/arriendos/:id", elimArriendo)
 router.post("/usuario/crear", crearUsuario)
 
 // Cambiar password
-router.post("/usuario/cambiar-password", cambiarPassword)
+router.patch("/usuario/cambiar-password", cambiarPassword)
 
 export default router
